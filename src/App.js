@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import './App.css';
 import Alert from './components/Alert';
-// import About from "./components/About";
+import About from './components/About';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
+import { BrowserRouter, Routes, Route, Link, NavLink } from 'react-router-dom';
 
 function App() {
   const [mode, setMode] = useState('light');
@@ -33,18 +34,37 @@ function App() {
     }
   };
   return (
-    <>
-      <Alert alert={alert} />
-      <Navbar title='textUtils' mode={mode} toggleMode={toggleMode} />
-      <div className='container my-3'>
-        {/* <About /> */}
-        <TextForm
-          heading='Enter the text to manipulate'
-          mode={mode}
-          showAlert={showAlert}
-        />
-      </div>
-    </>
+    <BrowserRouter>
+      <header>
+        <Navbar title='textUtils' mode={mode} toggleMode={toggleMode} />
+        <Alert alert={alert} />
+      </header>
+      <main>
+        <Routes>
+          <Route
+            index
+            element={
+              <div className='container my-3'>
+                <TextForm
+                  heading='Enter the text to manipulate'
+                  mode={mode}
+                  showAlert={showAlert}
+                />
+              </div>
+            }
+          />
+          <Route path='about' element={<About />} />
+          {/* <About /> */}
+          {/* <div className='container my-3'>
+            <TextForm
+              heading='Enter the text to manipulate'
+              mode={mode}
+              showAlert={showAlert}
+            />
+          </div> */}
+        </Routes>
+      </main>
+    </BrowserRouter>
   );
 }
 
