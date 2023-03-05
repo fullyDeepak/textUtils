@@ -55,38 +55,71 @@ export default function TextForm(props) {
             placeholder='Type here...'
             onChange={handleOnChange}
             style={{
-              backgroundColor: props.mode === 'light' ? 'white' : '#000032',
+              backgroundColor: props.mode === 'light' ? 'white' : '#000020',
               color: props.mode === 'light' ? 'black' : 'white',
               placeholderColor: props.mode === 'light' ? 'black' : 'white',
             }}
             id='myBox'
-            rows='8'></textarea>
+            rows='6'></textarea>
         </div>
-        <button className='btn btn-primary' onClick={handleUpClick}>
-          Convert to Uppercase
-        </button>
-        <button className='btn btn-primary mx-1' onClick={handleLowClick}>
-          Convert to Lowercase
-        </button>
-        <button className='btn btn-primary mx-1' onClick={handleCopy}>
-          Copy
-        </button>
-        <button className='btn btn-primary mx-1' onClick={handleChangeCase}>
-          Change case
-        </button>
-        <button className='btn btn-primary mx-1' onClick={handleExtraSpaces}>
-          Remove Extra Spaces
-        </button>
-        <button className='btn btn-danger mx-1' onClick={handleClearAll}>
-          Clear All
-        </button>
+        <div className='btn-div'>
+          <button
+            disabled={text.length === 0}
+            className='btn btn-primary m-1'
+            onClick={handleUpClick}>
+            Convert to Uppercase
+          </button>
+          <button
+            disabled={text.length === 0}
+            className='btn btn-primary m-1'
+            onClick={handleLowClick}>
+            Convert to Lowercase
+          </button>
+          <button
+            disabled={text.length === 0}
+            className='btn btn-primary m-1'
+            onClick={handleCopy}>
+            Copy
+          </button>
+          <button
+            disabled={text.length === 0}
+            className='btn btn-primary m-1'
+            onClick={handleChangeCase}>
+            Change case
+          </button>
+          <button
+            disabled={text.length === 0}
+            className='btn btn-primary m-1'
+            onClick={handleExtraSpaces}>
+            Remove Extra Spaces
+          </button>
+          <button
+            disabled={text.length === 0}
+            className='btn btn-danger m-1'
+            onClick={handleClearAll}>
+            Clear All
+          </button>
+        </div>
       </div>
-      <div className='container my-4'>
+      <div disabled={text.length === 0} className='container my-4'>
         <h2>Your text summary</h2>
         <p>
-          {text.split(' ').length} words and {text.length} character
+          {
+            text.split(/\s+/).filter((w) => {
+              return w.length > 0;
+            }).length
+          }{' '}
+          words and {text.length} character
         </p>
-        <p>{0.008 * text.split(' ').length} minutes read</p>
+        <p>
+          {(
+            0.008 *
+            text.split(' ').filter((w) => {
+              return w.length > 0;
+            }).length
+          ).toFixed(2)}{' '}
+          minutes read
+        </p>
         <h3>Preview</h3>
         <p>{text.length > 0 ? text : 'Write something to preview'}</p>
       </div>

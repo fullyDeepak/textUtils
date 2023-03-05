@@ -4,7 +4,7 @@ import Alert from './components/Alert';
 import About from './components/About';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
-import { BrowserRouter, Routes, Route, Link, NavLink } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   const [mode, setMode] = useState('light');
@@ -21,7 +21,7 @@ function App() {
   const toggleMode = () => {
     if (mode === 'light') {
       setMode('dark');
-      document.body.style.backgroundColor = '#09004d';
+      document.body.style.backgroundColor = '#000020';
       document.body.style.color = '#fff';
       showAlert('Dark mode has been enabled', 'success');
       document.title = 'textUtils - Dark Mode';
@@ -53,15 +53,7 @@ function App() {
               </div>
             }
           />
-          <Route path='about' element={<About />} />
-          {/* <About /> */}
-          {/* <div className='container my-3'>
-            <TextForm
-              heading='Enter the text to manipulate'
-              mode={mode}
-              showAlert={showAlert}
-            />
-          </div> */}
+          <Route path='about' element={<About mode={mode} />} />
         </Routes>
       </main>
     </BrowserRouter>

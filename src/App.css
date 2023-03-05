@@ -28,6 +28,14 @@
   color: #61dafb;
 }
 
+.accordion-button::after {
+  filter: invert(1);
+}
+
+.form-control::-webkit-input-placeholder {
+  filter: invert(0.6);
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -35,4 +43,13 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.btn-div {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.btn-div button {
+  flex-grow: 1;
 }
